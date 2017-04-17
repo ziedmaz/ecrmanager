@@ -578,7 +578,29 @@
 
                           <div class="text-center mtop20">
                             <a href="#" class="btn btn-sm btn-primary">Changer le statut</a>
-                            <a href="#" class="btn btn-sm btn-danger">Annuler le projet</a>
+                            <button type="button" data-toggle="modal" data-target=".annulerProjet" class="btn btn-sm btn-danger">Annuler le projet</button>
+                              <div class="modal fade annulerProjet" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                  <div class="modal-content">
+
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">×</span>
+                                      </button>
+                                      <h4 class="modal-title" id="labelpopup1">Annuler la création</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                      <h4>Annuler le projet ?</h4>
+                                      <p> Continuer la procédure engendra la suppression de tout les données reliés au projet</p>
+                                      <p></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-8">
+                                        <button type="button" class="btn btn-danger" > Annuler </button>  
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                           </div>
                         </div>
 

@@ -201,10 +201,10 @@
                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="crea_projet_sub.html">
 
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Numéro d'ECR <span class="required">*</span>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="numEcr">Numéro d'ECR <span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="numEcr" required="required" class="form-control col-md-7 col-xs-12">
                               </div>
                             </div> 
 
@@ -225,19 +225,19 @@
                             </div>  
 
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Description de la modification <span class="required">*</span>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desModif">Description de la modification <span class="required">*</span>
                               </label> 
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="description-modif" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="desModif" required="required" class="form-control col-md-7 col-xs-12">
                               </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cotation 4M"> Cotation 4M <span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cota4M"> Cotation 4M <span class="required">*</span>
                                 </label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                 <label for="infoclient">information client:</label>
-                                  <select id="infoclient" class="form-control" required>
+                                 <label for="cota4M">information client:</label>
+                                  <select id="cota4M" class="form-control" required>
                                     <option value="">Choisir..</option>
                                     <option value="press">A</option>
                                     <option value="net">B</option>
@@ -245,8 +245,8 @@
                                   </select>  
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6">
-                                 <label for="validationdoc">Validation documentaire :</label>
-                                  <select id="validationdoc" class="form-control" required>
+                                 <label for="cota4M">Validation documentaire :</label>
+                                  <select id="cota4M" class="form-control" required>
                                     <option value="">Choisir..</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -300,9 +300,9 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                  <button class="btn btn-primary" type="button" data-toggle="modal" data-target=".bs-example-modal-sm">Annuler</button>
+                                  <button class="btn btn-primary" type="button" data-toggle="modal" data-target=".annulerProjet">Annuler</button>
 
-                                    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal fade annulerProjet" tabindex="-1" role="dialog" aria-hidden="true">
                                       <div class="modal-dialog modal-sm">
                                         <div class="modal-content">
 
@@ -317,12 +317,13 @@
                                             <p></p>
                                           </div>
                                           <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                            <button type="button" class="btn btn-primary"> Annuler </button>
-                                          </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-8">
+                                              <button type="button" class="btn btn-danger" > Annuler </button>  
+                                            </div>
                                         </div>
                                       </div>
                                     </div>
+                                  </div>
                                   <button  class="btn btn-primary" type="reset">Reinitialiser</button>
                                   <button type="submit" class="btn btn-success">Valider</button>
                                 </div>
