@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ECR Manager</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Dropzone.js -->
+    <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>ECR Manager</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Bienvenue,</span>
+                <h2>Fares Brahem</h2>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Tableau de bord </a>
+                  </li>
+                  <li><a><i class="fa fa-edit"></i> To do list </a>
+                  </li>  
+                  <li><a><i class="fa fa-calendar"></i> Calendrier </a>
+                  </li> 
+                  <li><a><i class="fa fa-inbox"></i> Messagerie </a>
+                  </li>  
+                  <li><a><i class="fa fa-cog"></i> Paramètres </a>
+                  </li>                        
+                  <li><a href="login.html"><i class="fa fa-sign-out"></i> Se déconnecter </a>
+                  </li>
+                                             
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Tableau de bord" >
+                <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="To do list">
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Paramètres">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>              
+              <a data-toggle="tooltip" data-placement="top" title="Se déconnecter" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/img.jpg" alt="">Fares brahem
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Paramètres</a></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Se déconnecter</a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">2</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/amine.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>Amine ben Gamra</span>
+                          <span class="time">il y'a 3 mins</span>
+                        </span>
+                        <span class="message">
+                          Le projet N°52356 vous a été affecté.
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/gates.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>Bill gates</span>
+                          <span class="time">il y'a quelques instants</span>
+                        </span>
+                        <span class="message">
+                          Cette application est merveilleuse ! je veux l'acheter, peut importe le prix .. 
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>Voir tous les alertes</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Espace projet <small>Espace de contrôle des projets</small></h3>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>ECR N°521523</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                      <div class="demo-container" style="height:280px">
+                        <h2>Evolution de la progression du projet</h2>
+                        <div id="chart_plot_02" class="demo-placeholder"></div>
+                      </div>
+
+                      </br></br></br></br>
+                      <h2>Procédure spécifique du projet</h2>
+
+                      <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                          <div class="panel">
+                            <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              
+                              <h4 class="panel-title"><span class="glyphicon glyphicon-minus-sign"></span>  Etudes<span class="label label-success pull-right">Complet</span></h4>
+                            </a>
+                            </a>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                              <div class="panel-body">
+                              <p>Hello world !</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="panel">
+                            <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                               
+                              <h4 class="panel-title"><span class="glyphicon glyphicon-plus-sign"></span>   Kick-Off<span class="label label-success pull-right">Complet</span></h4>
+                            </a>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                              <div class="panel-body">
+                                <p><strong>Collapsible Item 2 data</strong>
+                                </p>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                              </div>
+                            </div>
+                          </div>
+                          <div class="panel">
+                            <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+                              <h4 class="panel-title"><span class="glyphicon glyphicon-plus-sign "></span>    Ouverture CMS<span class="label label-success pull-right">Complet</span></h4>
+                            </a>
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                              <div class="panel-body">
+                                <p><strong>Collapsible Item 3 data</strong>
+                                </p>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor
+                              </div>
+                            </div>
+                          </div>
+                          <div class="panel">
+                            <a class="panel-heading collapsed" role="tab" id="headingFour" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+
+                              <h4 class="panel-title"><span class="glyphicon glyphicon-plus-sign "></span>    Validation VALEO <span class="label label-info pull-right">En cours</span></h4>
+                            </a>
+                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                              <div class="panel-body">
+                                <p><strong>Tâches Standards</strong>
+                                </p>
+                                <table class="table table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Tâche</th>
+                                      <th>Délai</th>
+                                      <th>Applicabilité</th>
+                                      <th>Fichier requis</th>
+                                      <th>Etat</th>
+                                      <th>Paramètres</th>
+                                      <th>Valider</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">1</th>
+                                      <td>JPC/Audit process</td>
+                                      <td>25/04/2017 12:00 PM</td>
+                                      <td>OUI</td>
+                                      <td>OUI</td>
+                                      <td><span class="green"><i class="fa fa-check-circle"></i></span></td>
+                                      <td><button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary btn-xs"><i class="fa fa-pencil">Modifier</i></button>
+                                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                          <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel">Paramètres de la tâche</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="#">
+                                                    
+                                                    <div class=" form-group" > 
+                                                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Echance">Echéance <span class="required">*</span>
+                                                      </label>                        
+                                                      <fieldset>
+                                                        <div class="control-group">
+                                                          <div class="controls">
+                                                            <div class="col-md-6 xdisplay_inputx form-group has-feedback">
+                                                              <input type="text" class="form-control has-feedback-left" id="single_cal1" placeholder="Echeance" aria-describedby="inputSuccess2Status">
+                                                              <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                                              <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </fieldset>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="applicabilite"> Applicabilité <span class="required">*</span>
+                                                      </label>
+                                                      <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <select id="Applicabilite" class="form-control" required>
+                                                          <option value="">Choisir..</option>
+                                                          <option value="applicable">Applicable</option>
+                                                          <option value="non_applicable">Non Applicable</option>
+                                                        </select>  
+                                                      </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                        <button class="btn btn-primary" type="reintialiser">Reinitialiser</button>
+                                                        <button type="Submit" class="btn btn-success ">Enregistrer</button>
+                                                      </div>
+                                                    </div>
+                                                  </form>  
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <h6><span class="pull-left">NB : Veuillez noter que lors l'enregistrement de ces données vous ne pourrez plus les modifier</span></h6> </br>
+                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td><button type="button" data-toggle="modal" data-target=".bs-validation-modal-lg" class="btn btn-success btn-xs"><i class="fa fa-pencil">Valider</i></button>
+                                        <div class="modal fade bs-validation-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                          <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel">Validation de la tâche</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="crea_projet_sub.html">
+                                                    <div class="form-group">
+                                                      <label class="control-label col-md-3 col-sm-3 col-xs-12 " for="uploader">Téléverser le fichier requis <span class="required">*</span></label>
+                                                      <div class="col-md-9 col-sm-9 col-xs-12 ">
+                                                        <div id="uploader" action="#" class="dropzone"></div>   
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label class="control-label col-md-3 col-sm-3 col-xs-12 " for="Validation">Valider <span class="required">*</span></label> 
+                                                      <div class="col-md-3 col-sm-3 col-xs-12 ">
+                                                        <input id="validation" type="checkbox" class="js-switch" unchecked />
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <div class="col-md-3 col-sm-3 col-xs-6 col-md-offset-3">
+                                                        <button class="btn btn-primary" type="reset">Reset</button>
+                                                        <button type="Submit" class="btn btn-success ">Enregistrer</button>
+                                                      </div>
+                                                    </div>
+                                                </form> 
+                                              </div>
+                                              <div class="modal-footer">
+                                                <h6><span class="pull-left">NB : Veuillez noter que lors l'enregistrement de ces données vous ne pourrez plus les modifier</span></h6></br>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                              </div>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">2</th>
+                                      <td>Obtenir les données de capabilité processus</td>
+                                      <td>26/04/2017 15:00 PM</td>
+                                      <td>OUI</td>
+                                      <td>OUI</td>
+                                      <td><span class="green"><i class="fa fa-check-circle"></i></span></td>
+                                      <td><a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil">Modifier</td>
+                                      <td><a href="#" class="btn btn-success btn-xs"><i class="fa fa-pencil">Valider</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">3</th>
+                                      <td>Essai de Montabilité</td>
+                                      <td>28/04/2017 12:00 PM</td>
+                                      <td>OUI</td>
+                                      <td>NON</td>
+                                      <td><span class="green"><i class="fa fa-check-circle"></i></span></td>
+                                      <td><a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil">Modifier</td>
+                                      <td><a href="#" class="btn btn-success btn-xs"><i class="fa fa-pencil">Valider</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">4</th>
+                                      <td>Appliquer le plan de validation</td>
+                                      <td>11/05/2017 16:00 PM</td>
+                                      <td>OUI</td>
+                                      <td>NON</td>
+                                      <td><i class="fa fa-circle"></i></td>
+                                      <td><a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil">Modifier</td>
+                                      <td><a href="#" class="btn btn-success btn-xs"><i class="fa fa-pencil">Valider</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <p><strong>Tâches Non-standards</strong>
+                                </p>
+                                <table class="table table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Tâche</th>
+                                      <th>Délai</th>
+                                      <th>Fichier requis</th>
+                                      <th>Etat</th>
+                                      <th>Valider</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                      <th scope="row">1</th>
+                                      <td>ceçi est une tâche non-standard</td>
+                                      <td>25/04/2017 12:00 PM</td>
+                                      <td>OUI</td>
+                                      <td><span class="green"><i class="fa fa-check-circle"></i></span></td>
+                                      <td><a href="#" class="btn btn-success btn-xs"><i class="fa fa-pencil">Valider</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <button type="button" data-toggle="modal" data-target=".AjoutTâche" class="btn btn-primary pull-right">Ajouter une tâche</button>
+                                  <div class="modal fade AjoutTâche" tabindex="-1" role="dialog" aria-hidden="true">
+                                          <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel">Ajout d'une tâche non-standard</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="crea_projet_sub.html">
+                                                  
+                                                  <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="NomTâche">Nom <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                      <input type="text" id="NomTâche" required="required" class="form-control col-md-7 col-xs-12">
+                                                    </div>
+                                                  </div>
+
+                                                  <div class=" form-group" > 
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Echeance">Echéance <span class="required">*</span>
+                                                    </label>                        
+                                                    <fieldset>
+                                                      <div class="control-group">
+                                                        <div class="controls">
+                                                          <div class="col-md-4 xdisplay_inputx form-group has-feedback">
+                                                            <input type="text" class="form-control has-feedback-left" id="single_cal1" placeholder="Echeance" aria-describedby="inputSuccess2Status">
+                                                            <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </fieldset>
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fielreq"> Fichier requis <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                      <select id="filereq" class="form-control" required>
+                                                        <option value="">Choisir..</option>
+                                                        <option value="OUI">OUI</option>
+                                                        <option value="NON">NON</option>
+                                                      </select>  
+                                                    </div>
+                                                  </div>  
+
+                                                  <div class="form-group">
+                                                    <div class="col-md-3 col-sm-3 col-xs-6 col-md-offset-3">
+                                                      <button class="btn btn-primary" type="reset">Reset</button>
+                                                      <button type="Submit" class="btn btn-success ">Enregistrer</button>
+                                                    </div>
+                                                  </div>
+
+                                              </form> 
+                                              </div>
+                                              <div class="modal-footer">
+                                                <h6><span class="pull-left">NB : Veuillez noter que lors l'enregistrement de ces données vous ne pourrez plus les modifier</span></h6></br>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                              </div>
+
+                                            </div>
+                                          </div>
+                                        </div>
+
+                              </div>                               
+                            </div>
+                          </div>
+                          <div class="panel">
+                            <a class="panel-heading collapsed" role="tab" id="headingFive" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+
+                              <h4 class="panel-title"><span class="glyphicon glyphicon-plus-sign "></span>   Démarrage SOP<span class="label label-warning pull-right">Incomplet</span></h4>
+                            </a>
+                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                              <div class="panel-body">
+                                <p><strong>Collapsible Item 5 data</strong>
+                                </p>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor
+                              </div>
+                            </div>
+                          </div>
+                          <div class="panel">
+                            <a class="panel-heading collapsed" role="tab" id="headingSix" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+
+                              <h4 class="panel-title"><span class="glyphicon glyphicon-plus-sign "></span>    Clôture CMS<span class="label label-warning pull-right">Incomplet</span></h4>
+                            </a>
+                            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                              <div class="panel-body">
+                                <p><strong>Collapsible Item 6 data</strong>
+                                </p>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor
+                              </div>
+                            </div>
+                          </div>
+                          <div class="panel">
+                            <a class="panel-heading collapsed" role="tab" id="headingSeven" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+
+                              <h4 class="panel-title"><span class="glyphicon glyphicon-plus-sign "></span>    Processus dérogatoire<span class="label label-default pull-right">Non applicable</span></h4>
+                            </a>
+                            <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                              <div class="panel-body">
+                                <p><strong>Collapsible Item 7 data</strong>
+                                </p>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    <!-- start project-detail sidebar -->
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+
+                      <section class="panel">
+
+                        <div class="x_title">
+                          <h2>Description du projet</h2>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                          <h3 class="green"><i class="fa fa-pencil"></i> Désignation de <center>modification</center></h3>
+
+                          <p>Dimensionnement des clips des rotarys body HMI afin de resoudre le problème de déclipage spring blade en KM0 et garantie causant l'absence de la fonction et un bruit</p>
+                          <br />
+
+                          <div class="project_detail">
+
+                            <p class="title">Produit</p>
+                            <p>HMI</p>
+                            <p class="title">Cotation 4M</p>
+                            <p>C2</p>
+                            <p class="title">QPTM</p>
+                            <p>Mariem Arfaoui</p>
+                            <p class="title">Statut</p>
+                            <p><span class="label label-info ">En cours</span></h4></p>
+                          </div>
+
+                          <br />
+                          <h5>Fichiers du projet</h5>
+                          <ul class="list-unstyled project_files">
+                            <li><a href=""><i class="fa fa-file-excel-o"></i>PSQ.xlsx</a>
+                            </li>
+                            <li><a href=""><i class="fa fa-file-pdf-o"></i> GMP.pdf</a>
+                            </li>
+                            <li><a href=""><i class="fa fa-mail-forward"></i> Patrick melon(Annemasse).mln</a>
+                            </li>
+                          </ul>
+                          <br />
+
+                          <div class="text-center mtop20">
+                            <a href="#" class="btn btn-sm btn-primary">Changer le statut</a>
+                            <a href="#" class="btn btn-sm btn-danger">Annuler le projet</a>
+                          </div>
+                        </div>
+
+                      </section>
+
+                    </div>
+                    <!-- end project-detail sidebar -->
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+           ECR manager - Progiciel développé par Fares Brahem 
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- jQuery Sparklines -->
+    <script src="../vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- Chart.js -->
+    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- Flot -->
+    <script src="../vendors/Flot/jquery.flot.js"></script>
+    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../vendors/DateJS/build/date.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- Dropzone.js -->
+    <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
+    <!-- Switchery -->
+    <script src="../vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Parsley -->
+    <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+    <!-- Select2 -->
+    <script src="../vendors/select2/dist/js/select2.full.min.js"></script>    
+    
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('.collapse').on('shown.bs.collapse', function () {
+            $(this).parent().find('.glyphicon-plus-sign')
+                    .removeClass('glyphicon-plus-sign')
+                    .addClass('glyphicon-minus-sign');
+        }).on('hidden.bs.collapse', function () {
+            $(this).parent().find(".glyphicon-minus-sign")
+                            .removeClass("glyphicon-minus-sign")
+                            .addClass("glyphicon-plus-sign");
+        });
+    });
+    </script>
+  </body>
+</html>
