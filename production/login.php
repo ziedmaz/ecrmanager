@@ -52,7 +52,7 @@
           ?> 
 
           <section class="login_content">
-            <form action="login_verif.php" method="post">
+            <form action="register.php" method="post">
               <h1>Se Connecter</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Nom d'Utilisateur" required="" />
@@ -113,7 +113,7 @@
             }
           ?> 
           <section class="login_content">
-            <form action="login_verif.php" method="post">
+            <form action="register.php" method="post">
               <h1>Créer Un Compte</h1>
               <div>
                 <input name="username" type="text" class="form-control" placeholder="Nom d'Utilisateur" required="" />
