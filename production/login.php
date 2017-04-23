@@ -43,7 +43,32 @@
                   <div class="alert alert-success alert-dismissible fade in" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                     </button>
-                    <strong>Succès!</strong></br> Une demande à été envoyée à votre leader.</br> Votre compte sera activé lors de sa confirmation
+                    <strong>Succès!</strong></br> Une demande à été envoyée à votre leader.</br> Votre compte sera activé lors de sa confirmation.
+                  </div> 
+                             
+                <?php
+                }
+            }
+          if(isset($_GET['nc']))
+            {
+              ?>
+                <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+                  Veuillez vous connecter avant d'accéder au plateforme. 
+                </div> 
+                           
+              <?php
+            }
+          if(isset($_GET['con']))
+            {
+             if($_GET['con']==0)
+                {
+                ?>
+                  <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Connection interrompue </strong></br> Veuillez verifier vos identifiants et réessayer .
                   </div> 
                              
                 <?php
@@ -52,13 +77,13 @@
           ?> 
 
           <section class="login_content">
-            <form action="register.php" method="post">
+            <form action="connection_uti.php" method="post">
               <h1>Se Connecter</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Nom d'Utilisateur" required="" />
+                <input name="username" type="text" class="form-control" placeholder="Nom d'Utilisateur" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Mot de Passe" required="" />
+                <input name="mdp" type="password" class="form-control" placeholder="Mot de Passe" required="" />
               </div>
               <div>
                 <button class="btn btn-default submit" >Se Connecter</button>

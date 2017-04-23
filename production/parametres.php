@@ -1,3 +1,17 @@
+<?php
+session_start() ;
+if (isset($_SESSION['username']) && isset($_SESSION['email']) && isset($_SESSION['priorite']))
+  {
+    $Nutilisateur = $_SESSION['username'] ;
+    $email = $_SESSION['email'] ;
+    $priorite = $_SESSION['priorite'] ;    
+  }
+else
+  {
+    header('location:login.php?nc=1') ;
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,9 +29,13 @@
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-        <!-- FullCalendar -->
-    <link href="../vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
-    <link href="../vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.custom.min.css" rel="stylesheet">
+    <!--Kartik-->
+    <link href="../vendors/kartik/fileinput.min.css" rel="stylesheet" media="all" type="text/css">
+
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -41,7 +59,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenue,</span>
-                <h2>Fares Brahem</h2>
+                <h2><?php echo $Nutilisateur ?></h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -62,7 +80,7 @@
                   </li>  
                   <li><a href="Calendrier.php"><i class="fa fa-calendar"></i> Calendrier </a>
                   </li>  
-                  <li><a><i class="fa fa-cog"></i> Paramètres </a>
+                  <li><a href="parametres.php"><i class="fa fa-cog"></i> Paramètres </a>
                   </li>                        
                   <li><a href="login.php"><i class="fa fa-sign-out"></i> Se déconnecter </a>
                   </li>
@@ -80,7 +98,7 @@
               <a href="to_do_list.php" data-toggle="tooltip" data-placement="top" title="Profil">
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
               </a>
-              <a href="Calendrier.php" data-toggle="tooltip" data-placement="top" title="Paramètres">
+              <a href="parametres.php" data-toggle="tooltip" data-placement="top" title="Paramètres">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>              
               <a href="login.php" data-toggle="tooltip" data-placement="top" title="Se déconnecter" >
@@ -102,7 +120,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Fares brahem
+                    <img src="images/img.jpg" alt=""><?php echo $Nutilisateur ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -159,21 +177,21 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-       <div class="right_col" role="main">
+        <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Calendrier <small>Cliquer pour ajouter/modifier des évènements</small></h3>
+                <h3>Parametres</h3>
               </div>
             </div>
 
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Evénements</h2>
+                    <h2>Paramètres du profil</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -183,15 +201,53 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                  <br />
+                      
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="changerpdp">Changer la photo de profil
+                  </label>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                  <input id="changerpdp" name="changerpdp[]" type="file" class="file" data-preview-file-type="text" multiple class="file-loading" data-allowed-file-extensions='["jpg", "png"]' data-language="fr">
+                  </div>
+                  <br/> <br/> <br/><br/>
+                    <div class="col-sm-12 col-md-12 col-xs-12">
+                      <form id="utidata" data-validate="parsley" class="form-horizontal form-label-left" action="#">
 
-                    <div id='calendar'></div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="changermdp">Changer le mot de passe
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="password" id="changermdp" class="form-control col-md-7 col-xs-12" placeholder="Mot de passe" >
+                          </div>
+                        </div>  
 
+
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="changeremail">Changer l'adresse E-mail
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="Email" id="changeremail" class="form-control col-md-7 col-xs-12" placeholder="Adresse Email"  >
+                          </div>
+                        </div> 
+
+                        <div class="In_solid"></div>
+                        <div class="form-group">
+                          <div class="col-sm-3 col-md-offset-3 col-xs-12">
+                            <button class="btn btn-primary" type="reset">Reinitialiser</button>
+                            <button type="submit" class="btn btn-success">Changer</button>
+                          </div>
+                        </div>
+
+                      </form> 
+
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+
         <!-- /page content -->
 
         <!-- footer content -->
@@ -205,81 +261,7 @@
       </div>
     </div>
 
-    <!-- calendar modal -->
-    <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="myModalLabel">New Calendar Entry</h4>
-          </div>
-          <div class="modal-body">
-            <div id="testmodal" style="padding: 5px 20px;">
-              <form id="antoform" class="form-horizontal calender" role="form">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Title</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="title" name="title">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Description</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" style="height:55px;" id="descr" name="descr"></textarea>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary antosubmit">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="myModalLabel2">Edit Calendar Entry</h4>
-          </div>
-          <div class="modal-body">
-
-            <div id="testmodal2" style="padding: 5px 20px;">
-              <form id="antoform2" class="form-horizontal calender" role="form">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Title</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="title2" name="title2">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Description</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
-                  </div>
-                </div>
-
-              </form>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
-    <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
-    <!-- /calendar modal -->
-
-   <!-- jQuery -->
+    <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -287,9 +269,13 @@
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- FullCalendar -->
-    <script src="../vendors/moment/min/moment.min.js"></script>
-    <script src="../vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+    <!--Katrik-->
+    <script src="../vendors/kartik/plugins/canvas-to-blob.js" type="text/javascript"></script>
+    <script src="../vendors/kartik/fileinput.min.js" type="text/javascript"></script>
+    <script src="../vendors/kartik/fr.js" type="text/javascript"></script>
+    <!-- Parsley -->
+    <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+    <script src="../vendors/parsleyjs/dist/i18n/fr.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>

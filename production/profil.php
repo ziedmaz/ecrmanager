@@ -1,3 +1,17 @@
+<?php
+session_start() ;
+if (isset($_SESSION['username']) && isset($_SESSION['email']) && isset($_SESSION['priorite']))
+  {
+    $Nutilisateur = $_SESSION['username'] ;
+    $email = $_SESSION['email'] ;
+    $priorite = $_SESSION['priorite'] ;    
+  }
+else
+  {
+    header('location:login.php?nc=1') ;
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,6 +31,11 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.custom.min.css" rel="stylesheet">
+    <!--Kartik-->
+    <link href="../vendors/kartik/fileinput.min.css" rel="stylesheet">
+
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -40,7 +59,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenue,</span>
-                <h2>Fares Brahem</h2>
+                <h2><?php echo $Nutilisateur ?></h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -53,19 +72,17 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-Dashboard"></i> Tableau de bord </a>
+                  <li><a><i class="fa fa-dashboard"></i> Tableau de bord </a>
                   </li>
-                  <li><a><i class="fa fa-home"></i> Profil </a>
+                  <li><a href="profil.php"><i class="fa fa-home"></i> Profil </a>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> To do list </a>
+                  <li><a href="to_do_list.php"><i class="fa fa-edit"></i> To do list </a>
                   </li>  
-                  <li><a><i class="fa fa-calendar"></i> Calendrier </a>
-                  </li> 
-                  <li><a><i class="fa fa-inbox"></i> Messagerie </a>
+                  <li><a href="Calendrier.php"><i class="fa fa-calendar"></i> Calendrier </a>
                   </li>  
                   <li><a><i class="fa fa-cog"></i> Paramètres </a>
                   </li>                        
-                  <li><a href="login.html"><i class="fa fa-sign-out"></i> Se déconnecter </a>
+                  <li><a href="login.php"><i class="fa fa-sign-out"></i> Se déconnecter </a>
                   </li>
                                              
                 </ul>
@@ -75,16 +92,16 @@
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Tableau de bord" >
+              <a  href="profil.php" data-toggle="tooltip" data-placement="top" title="Tableau de bord" >
                 <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Profil">
+              <a href="to_do_list.php" data-toggle="tooltip" data-placement="top" title="Profil">
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Paramètres">
+              <a href="Calendrier.php" data-toggle="tooltip" data-placement="top" title="Paramètres">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>              
-              <a data-toggle="tooltip" data-placement="top" title="Se déconnecter" href="login.html">
+              <a href="login.php" data-toggle="tooltip" data-placement="top" title="Se déconnecter" >
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -103,13 +120,13 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Fares brahem
+                    <img src="images/img.jpg" alt=""><?php echo $Nutilisateur ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;">Profil</a></li>
+                    <li><a href="profil.php">Profil</a></li>
                     <li><a href="javascript:;"> Paramètres</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Se déconnecter</a></li>
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Se déconnecter</a></li>
                   </ul>
                 </li>
 
@@ -191,23 +208,20 @@
                           <img class="img-responsive avatar-view" src="images/img.jpg" alt="Avatar" title="Change the avatar">
                         </div>
                       </div>
-                      <h3>Fares Brahem</h3>
+                      <h3><?php echo $Nutilisateur?></h3>
 
                       <ul class="list-unstyled user_data">
-                        <li><i class="fa fa-map-marker user-profile-icon"></i> Tunis, TUNISIE
-                        </li>
-
                         <li>
                           <i class="fa fa-briefcase user-profile-icon"></i> Ingénieur qualité projet
                         </li>
 
                         <li class="m-top-xs">
                           <i class="fa fa-external-link user-profile-icon"></i>
-                          <a href="http://www.kimlabs.com/profile/" target="_blank">www.Valeo.com</a>
+                          <a href="http://www.Valeo.com" target="_blank">www.Valeo.com</a>
                         </li>
                       </ul>
 
-                      <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Modifier Profil</a>
+                      <a href="parametres.php" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Modifier Profil</a>
                       <br />
 
                       
@@ -285,7 +299,7 @@
                                   <p class="month">Avril</p>
                                 </div>
                                 <div class="message_wrapper">
-                                  <h4 class="heading">Fares</h4>
+                                  <h4 class="heading">Fares Brahem</h4>
                                   <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
                                   <br />
                                 </div>
@@ -305,7 +319,7 @@
                                   <th>N° ECR</th>
                                   <th>Produit</th>
                                   <th>Date de création</th>
-                                  <th>Contribution</th>
+                                  <th>Progrès</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -396,8 +410,43 @@
     <!-- bootstrap-daterangepicker -->
     <script src="../vendors/moment/min/moment.min.js"></script>
     <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.custom.min.js"></script>   
+    <!--Kartik-->
+    <script src="../vendors/kartik/fileinput.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <?php
+    if (isset($_GET['ft']))
+      {
+    ?>
+        <script type="text/javascript">
+
+
+          $(document).ready(function () {
+            PNotify.removeAll() ;
+            new PNotify({
+                      title: 'Connecté !',
+                      text: 'Bienvenue dans la plateforme',
+                      type: 'success',
+                      styling: 'bootstrap3'
+                    }) ;
+           });
+        </script>
+    <?php 
+      }
+    else
+      {
+    ?>
+    <script type="text/javascript">
+
+
+          $(document).ready(function () {
+            PNotify.removeAll() ;
+          });
+    </script>
+    <?php 
+      }
+    ?>
   </body>
 </html>
