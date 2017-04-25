@@ -80,7 +80,7 @@
             <form action="connection_uti.php" method="post">
               <h1>Se Connecter</h1>
               <div>
-                <input name="username" type="text" class="form-control" placeholder="Nom d'Utilisateur" required="" />
+                <input name="nomUti" type="text" class="form-control" placeholder="Nom d'Utilisateur" required="" />
               </div>
               <div>
                 <input name="mdp" type="password" class="form-control" placeholder="Mot de Passe" required="" />
@@ -131,7 +131,7 @@
                 <div class="alert alert-warning alert-dismissible fade in" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                   </button>
-                  <strong>Attention</strong> le nom d'utilisateur existe déjà ! veuillez le changer.
+                  <strong>Attention</strong> Cet utilisateur existe déjà ! veuillez changer l'email.
                 </div> 
               <?php
               }

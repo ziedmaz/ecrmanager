@@ -1,15 +1,52 @@
 <?php
+function chargerClasse($classe)
+{
+  require $classe . '.php';
+}
+
+spl_autoload_register('chargerClasse');
 session_start() ;
-if (isset($_SESSION['username']) && isset($_SESSION['email']) && isset($_SESSION['priorite']))
-  {
-    $Nutilisateur = $_SESSION['username'] ;
-    $email = $_SESSION['email'] ;
-    $priorite = $_SESSION['priorite'] ;    
-  }
-else
-  {
+if (!isset($_SESSION['utilisateur']))
+{
     header('location:login.php?nc=1') ;
-  }
+    exit() ;
+}
+else
+{
+  $utilisateur=$_SESSION['utilisateur'] ;
+}
+if(!empty($_POST['mdp']) or !empty($_POST['email']))
+{
+    if(!empty($_POST['mdp']))
+    {
+      $mdp=sha1($_POST['mdp']) ;
+      try
+        {
+          $utilisateur->setMdp($mdp) ; 
+        }
+      catch(Exception $e)
+        {
+          die('Erreur'.$e->getMessage()) ;
+        }
+    }
+    if(!empty($_POST['email']))
+    {
+        try
+      {
+        $utilisateur->setEmail($_POST['email']) ;
+      }
+        catch(Exception $e)
+      {
+        die('Erreur'.$e->getMessage()) ;
+      }
+    }
+  $db = new PDO('mysql:host=localhost;dbname=ecrmanager','root','');
+  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+  $manager = new UtilisateurManager($db) ;
+  $manager->update($utilisateur) ;  
+  header('location:profil.php?pm=1') ;
+  exit;
+}
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +71,7 @@ else
     <!-- PNotify -->
     <link href="../vendors/pnotify/dist/pnotify.custom.min.css" rel="stylesheet">
     <!--Kartik-->
-    <link href="../vendors/kartik/fileinput.min.css" rel="stylesheet" media="all" type="text/css">
+    <link href="../vendors/kartik/fileinput.min.css" rel="stylesheet">
 
 
     <!-- Custom Theme Style -->
@@ -55,11 +92,11 @@ else
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="<?php echo $utilisateur->Imgsrc()?>" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Bienvenue,</span>
-                <h2><?php echo $Nutilisateur ?></h2>
+                <h2><?php echo $utilisateur->NomUti() ?></h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -98,7 +135,7 @@ else
               <a href="to_do_list.php" data-toggle="tooltip" data-placement="top" title="Profil">
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
               </a>
-              <a href="parametres.php" data-toggle="tooltip" data-placement="top" title="Paramètres">
+              <a href="Calendrier.php" data-toggle="tooltip" data-placement="top" title="Paramètres">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>              
               <a href="login.php" data-toggle="tooltip" data-placement="top" title="Se déconnecter" >
@@ -120,7 +157,7 @@ else
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo $Nutilisateur ?>
+                    <img src="<?php echo $utilisateur->Imgsrc()?>" alt=""><?php echo $utilisateur->NomUti() ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -202,21 +239,23 @@ else
                   </div>
                   <div class="x_content">
                   <br />
-                      
+
+                  <h2> Changer la photo de profil</h2><br/>    
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="changerpdp">Changer la photo de profil
                   </label>
                   <div class="col-md-3 col-sm-3 col-xs-12">
-                  <input id="changerpdp" name="changerpdp[]" type="file" class="file" data-preview-file-type="text" multiple class="file-loading" data-allowed-file-extensions='["jpg", "png"]' data-language="fr">
+                  <input id="changerpdp" name="changerpdp" type="file" class="file" data-preview-file-type="text" multiple class="file-loading" data-allowed-file-extensions='["jpg", "png"]' data-language="fr" >
                   </div>
                   <br/> <br/> <br/><br/>
-                    <div class="col-sm-12 col-md-12 col-xs-12">
-                      <form id="utidata" data-validate="parsley" class="form-horizontal form-label-left" action="#">
 
+                    <div class="col-sm-12 col-md-12 col-xs-12">
+                      <form id="utidata" data-validate="parsley" class="form-horizontal form-label-left" action="parametres.php" method="POST">
+                        <h2> Informations relatives au compte</h2>
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="changermdp">Changer le mot de passe
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="password" id="changermdp" class="form-control col-md-7 col-xs-12" placeholder="Mot de passe" >
+                            <input name= "mdp" type="password" id="changermdp" class="form-control col-md-7 col-xs-12" placeholder="Mot de passe" >
                           </div>
                         </div>  
 
@@ -225,7 +264,7 @@ else
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="changeremail">Changer l'adresse E-mail
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="Email" id="changeremail" class="form-control col-md-7 col-xs-12" placeholder="Adresse Email"  >
+                            <input name="email" type="Email" id="changeremail" class="form-control col-md-7 col-xs-12" placeholder="Adresse Email"  >
                           </div>
                         </div> 
 

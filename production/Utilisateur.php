@@ -2,11 +2,12 @@
 abstract class Utilisateur 
 {
 	protected $idUti ; 
-	protected $nom ; 
+	protected $nomUti ; 
 	protected $email ; 
 	protected $mdp ; 
 	protected $priorite ;
 	protected $imgsrc ; 
+
 
 	public function __construct(array $donnees)
 		{
@@ -27,62 +28,61 @@ abstract class Utilisateur
 	    }
 	  }
 
-	public function getImgsrc()
+	public function Imgsrc()
 		{
 			return $this->imgsrc ; 
 		}
 	  
-	public function getIdUti()
+	public function IdUti()
 		{
-			return $this->IdUti ; 
+			return $this->idUti ; 
 		}
 
-	public function getNom() ; 
+	public function NomUti()  
 		{
-			return $this->$nom ; 
+			return $this->nomUti ; 
 		}
 
-	public function getEmail() ; 
+	public function Email() 
 		{
-			return $this->$email ; 
+			return $this->email ; 
 		}
-	public function getMdp() ; 
+	public function Mdp() 
 		{
-			return $this->$mdp ; 
+			return $this->mdp ; 
 		}
-	public function getPriorite() ; 
+	public function Priorite() 
 		{
-			return $this->$priorite ; 
+			return $this->priorite ; 
 		}
-	public function setNom($nomm)
+	public function setNomUti($nomm)
 		{
 			if (is_string($nomm))
 				{
-					$this->$nom = $nomm ; 
+					$this->nomUti = $nomm ; 
 				}
 		}
 	public function setMdp($mdpp)
 		{
-			$mdpp = sha1($mdpp) ;
-			$this->$mdp = $mdpp ;
+			$this->mdp = $mdpp ;
 		}
 	public function setPriorite($prioritee)
 		{
 			$prioritee =(int) $prioritee ; 
-			$this->$priorite = $prioritee ;
+			$this->priorite = $prioritee ;
 		}
 	public function setEmail($emaill)
 		{
-			$this->$email = $emaill  ; 
+			$this->email = $emaill  ; 
 		}
 	public function setIdUti($IdUti)
 		{
 			$IdUti = (int) $IdUti ;
-			$this->$idUti = $IdUti ; 
+			$this->idUti = $IdUti ; 
 		}
 	public function setImgsrc($imgsrcc)
 		{
-			$this->$imgsrc = $imgsrcc ; 
+			$this->imgsrc = $imgsrcc ; 
 		}
 
 

@@ -1,16 +1,32 @@
 <?php 
-if (isset($_GET['username']) && isset($_GET['password']) && isset($_GET['Email']))
+function chargerClasse($classe)
+{
+  require $classe . '.php';
+}
+
+spl_autoload_register('chargerClasse');
+
+$db = new PDO('mysql:host=localhost;dbname=ecrmanager', 'root', '');
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+
+
+$manager = new UtilisateurManager($db) ; 
+
+if (isset($_GET['nom']) AND isset($_GET['mdp']) AND isset($_GET['email']))
 	{
-		//creation objet base de donnée
-		$db = new PDO('mysql:host=localhost;dbname=ecrmanager', 'root', '');
-		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-		//requête
-		$q=$db->prepare('INSERT INTO `utilisateur`(`nomUti`, `email`, `mdp`, `priorite`) VALUES (:nomUti , :email ,:mdp , 0)') ;
-		$q->bindValue(':nomUti',$_GET['username']) ;
-		$q->bindValue(':email',$_GET['Email']) ;
-		$q->bindValue(':mdp',$_GET['password']) ;
-		$q->execute() ;
-		header('location:profil.html') ;
+		$utlisateur = new QPTM(['nom' => $_GET['nom'],
+								'mdp' => $_GET['mdp'],
+								'email'=> $_GET['email']]) ;
+		try
+		{
+			$manager->ajouter($utlisateur) ;
+		}
+		catch(Exception $e)
+		{
+			die('Erreur :'.$e->getMessage()) ;
+		}
+		unset($utlisateur) ;
+		header('location:profil.php');
 	}
 else 
 	{

@@ -1,15 +1,21 @@
 <?php
+function chargerClasse($classe)
+{
+  require $classe . '.php';
+}
+
+spl_autoload_register('chargerClasse');
 session_start() ;
-if (isset($_SESSION['username']) && isset($_SESSION['email']) && isset($_SESSION['priorite']))
-  {
-    $Nutilisateur = $_SESSION['username'] ;
-    $email = $_SESSION['email'] ;
-    $priorite = $_SESSION['priorite'] ;    
-  }
-else
-  {
+if (!isset($_SESSION['utilisateur']))
+{
     header('location:login.php?nc=1') ;
-  }
+    exit() ;
+}
+else
+{
+  $utilisateur=$_SESSION['utilisateur'] ;
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -55,11 +61,11 @@ else
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="<?php echo $utilisateur->Imgsrc()?>" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Bienvenue,</span>
-                <h2><?php echo $Nutilisateur ?></h2>
+                <h2><?php echo $utilisateur->NomUti() ?></h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -120,7 +126,7 @@ else
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo $Nutilisateur ?>
+                    <img src="<?php echo $utilisateur->Imgsrc()?>" alt=""><?php echo $utilisateur->NomUti() ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -205,10 +211,10 @@ else
                       <div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="images/img.jpg" alt="Avatar" title="Change the avatar">
+                          <img class="img-responsive avatar-view" src="<?php echo $utilisateur->Imgsrc()?>" alt="Avatar" title="Change the avatar">
                         </div>
                       </div>
-                      <h3><?php echo $Nutilisateur?></h3>
+                      <h3><?php echo $utilisateur->NomUti()?></h3>
 
                       <ul class="list-unstyled user_data">
                         <li>
@@ -257,7 +263,7 @@ else
                             <!-- start recent activity -->
                             <ul class="messages">
                               <li>
-                                <img src="images/img.jpg" class="avatar" alt="Avatar">
+                                <img src="<?php echo $utilisateur->Imgsrc() ?>" class="avatar" alt="Avatar">
                                 <div class="message_date">
                                   <h3 class="date text-info">19</h3>
                                   <p class="month">Avril</p>
@@ -269,7 +275,7 @@ else
                                 </div>
                               </li>
                               <li>
-                                <img src="images/img.jpg" class="avatar" alt="Avatar">
+                                <img src="<?php echo $utilisateur->Imgsrc() ?>" class="avatar" alt="Avatar">
                                 <div class="message_date">
                                   <h3 class="date text-error">17</h3>
                                   <p class="month">Avril</p>
@@ -281,7 +287,7 @@ else
                                 </div>
                               </li>
                               <li>
-                                <img src="images/img.jpg" class="avatar" alt="Avatar">
+                                <img src="<?php echo $utilisateur->Imgsrc() ?>" class="avatar" alt="Avatar">
                                 <div class="message_date">
                                   <h3 class="date text-info">14</h3>
                                   <p class="month">Avril</p>
@@ -293,7 +299,7 @@ else
                                 </div>
                               </li>
                               <li>
-                                <img src="images/img.jpg" class="avatar" alt="Avatar">
+                                <img src="<?php echo $utilisateur->Imgsrc() ?>" class="avatar" alt="Avatar">
                                 <div class="message_date">
                                   <h3 class="date text-error">13</h3>
                                   <p class="month">Avril</p>
@@ -428,6 +434,24 @@ else
             new PNotify({
                       title: 'Connecté !',
                       text: 'Bienvenue dans la plateforme',
+                      type: 'success',
+                      styling: 'bootstrap3'
+                    }) ;
+           });
+        </script>
+    <?php 
+      }
+    if (isset($_GET['pm']))
+      {
+    ?>
+        <script type="text/javascript">
+
+
+          $(document).ready(function () {
+            PNotify.removeAll() ;
+            new PNotify({
+                      title: 'Succés !',
+                      text: 'Vos informations ont été bien modifiés',
                       type: 'success',
                       styling: 'bootstrap3'
                     }) ;

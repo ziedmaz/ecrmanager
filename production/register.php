@@ -3,8 +3,8 @@ require '../vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
 //objet BDD
 $db = new PDO('mysql:host=localhost;dbname=ecrmanager', 'root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-$q=$db->prepare('SELECT COUNT(*) FROM utilisateur WHERE nomUti = ? ') ;
-$q->execute(array($_POST['username'])) ;
+$q=$db->prepare('SELECT COUNT(*) FROM utilisateur WHERE email = ? ') ;
+$q->execute(array($_POST['Email'])) ;
 $resultat = $q->fetchColumn();
 $mdp=$_POST['mdp'];
 $mdp=sha1($mdp) ;
