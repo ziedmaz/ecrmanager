@@ -441,7 +441,7 @@ else
         </script>
     <?php 
       }
-    if (isset($_GET['pm']))
+    elseif (isset($_GET['pm']))
       {
     ?>
         <script type="text/javascript">
