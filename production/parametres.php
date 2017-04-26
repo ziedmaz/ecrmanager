@@ -249,7 +249,7 @@ if(!empty($_POST['mdp']) or !empty($_POST['email']))
                   <br/> <br/> <br/><br/>
 
                     <div class="col-sm-12 col-md-12 col-xs-12">
-                      <form id="utidata" data-validate="parsley" class="form-horizontal form-label-left" action="parametres.php" method="POST">
+                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="parametres.php" method="POST">
                         <h2> Informations relatives au compte</h2>
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="changermdp">Changer le mot de passe

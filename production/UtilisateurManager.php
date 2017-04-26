@@ -11,18 +11,23 @@ class UtilisateurManager
 
 		public function ajouter(QPTM $utilisateur)
 			{
-				$default_imgsrc = 'imagesuti/0.jpg' ; 
-				$q=$this->_db->prepare('INSERT INTO utilisateur(nomUti,email,mdp,priorite,imgsrc) VALUES (:nomUti,:email,:mdp,:priorite,:imgsrc)') ;
+				
+				$default_imgsrc = 'imagesuti/0.jpg' ;
+				$default_activated = 0 ; 
+				$q=$this->_db->prepare('INSERT INTO utilisateur(nomUti,email,mdp,priorite,imgsrc,activated) VALUES (:nomUti,:email,:mdp,:priorite,:imgsrc,:activated)') ;
 				$q->bindValue(':nomUti',$utilisateur->NomUti()) ;
 				$q->bindValue(':email',$utilisateur->Email()) ;
 				$q->bindValue(':mdp',$utilisateur->Mdp()) ;
 				$q->bindValue(':priorite',$utilisateur->Priorite(),PDO::PARAM_INT) ;
 				$q->bindValue(':imgsrc',$default_imgsrc) ;
+				$q->bindValue(':activated',$default_activated) ;
 				$q->execute() ;
 
 				$utilisateur->hydrate([
-					'idUti' => $this->_db->lastInsertId(), 
+					'idUti' => $this->_db->lastInsertId(),
+					'activated' => 0  
 					]) ;
+
 			}
 
 		public function update(Utilisateur $utilisateur)
@@ -33,6 +38,11 @@ class UtilisateurManager
 				$q->bindValue(':imgsrc',$utilisateur->Imgsrc()) ;
 				$q->bindValue(':id',$utilisateur->IdUti()) ;
 				$q->execute() ;
+			}
+
+		public function activate(Utilisateur $utilisateur)
+			{
+				$q = $this->_db->query('UPDATE utilisateur SET `activated`= 1') ;
 			}
 
 		public function setDb($db)
@@ -54,12 +64,31 @@ class UtilisateurManager
 			}
 		}
 
-		public function existe($nomUtii,$mdpp)
+		public function get2Activate($nomUtii,$emaill)
+		{
+			$req = $this->_db->prepare('SELECT * FROM utilisateur WHERE nomUti=? AND email =?');
+			$req->execute(array($nomUtii,$emaill));
+
+			$donnees = $req->fetch(PDO::FETCH_ASSOC) ;
+
+			return new QPTM ($donnees) ;
+		}
+
+		public function existe2Register($nomUtii,$emaill)
+		{
+			$req = $this->_db->prepare('SELECT * FROM utilisateur WHERE nomUti=? AND email =?');
+			$req->execute(array($nomUtii,$emaill));
+
+			return (bool) $req->fetch(PDO::FETCH_ASSOC) ;
+		}
+
+		public function existe2Connect($nomUtii,$mdpp)
 		{
 			$req = $this->_db->prepare('SELECT * FROM utilisateur WHERE nomUti=? AND mdp =?');
 			$req->execute(array($nomUtii,sha1($mdpp)));
 
 			return (bool) $req->fetch(PDO::FETCH_ASSOC) ;
 		}
+
 
 	}

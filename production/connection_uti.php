@@ -6,11 +6,10 @@ function chargerClasse($classe)
 
 spl_autoload_register('chargerClasse');
 
-$db = new PDO('mysql:host=localhost;dbname=ecrmanager','root','');
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+include 'db_init.php';
 $manager = new UtilisateurManager($db) ;
 
-if(!$manager->existe($_POST['nomUti'],$_POST['mdp']))
+if(!$manager->existe2Connect($_POST['nomUti'],$_POST['mdp']))
 	{
 		header('location:login.php?con=0#signin');
 		exit();

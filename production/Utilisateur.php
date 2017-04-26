@@ -6,7 +6,8 @@ abstract class Utilisateur
 	protected $email ; 
 	protected $mdp ; 
 	protected $priorite ;
-	protected $imgsrc ; 
+	protected $imgsrc ;
+	protected $activated ;  
 
 
 	public function __construct(array $donnees)
@@ -28,6 +29,10 @@ abstract class Utilisateur
 	    }
 	  }
 
+	public function activated()
+		{
+			return $this->activated ; 
+		}
 	public function Imgsrc()
 		{
 			return $this->imgsrc ; 
@@ -83,6 +88,14 @@ abstract class Utilisateur
 	public function setImgsrc($imgsrcc)
 		{
 			$this->imgsrc = $imgsrcc ; 
+		}
+	public function setActivated($activatedd)
+		{
+			$activatedd = (int) $activatedd ; 
+			if($activatedd == 0 OR $activatedd == 1)
+			{
+				$this->activated = $activatedd;
+			}
 		}
 
 

@@ -141,10 +141,10 @@
             <form action="register.php" method="post">
               <h1>Créer Un Compte</h1>
               <div>
-                <input name="username" type="text" class="form-control" placeholder="Nom d'Utilisateur" required="" />
+                <input name="nomUti" type="text" class="form-control" placeholder="Nom d'Utilisateur" required="" />
               </div>
               <div>
-                <input name="Email" type="email" class="form-control" placeholder="Email" required="" />
+                <input name="email" type="email" class="form-control" placeholder="Email" required="" />
               </div>
               <div>
                 <input name="mdp" type="password" class="form-control" placeholder="Mot de Passe" required="" />
