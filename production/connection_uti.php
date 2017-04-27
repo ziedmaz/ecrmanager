@@ -24,8 +24,17 @@ else
 			{
 				die('Erreur :'.$e->getMessage());
 			}
-		session_start();
-		$_SESSION['utilisateur'] = $utilisateur;
-		header('location:profil.php?ft=1');
-		exit();
+		// si le compte de l'utilisateur n'est pas encore activé on le redirige vers la page du login  
+		if ($utilisateur->Activated()==0)
+		{
+			header('location:login.php?na=1') ;
+		}
+		else
+		{
+			session_start();
+			$_SESSION['utilisateur'] = $utilisateur;
+			header('location:profil.php?ft=1');
+			exit();	
+		}
+
 	}

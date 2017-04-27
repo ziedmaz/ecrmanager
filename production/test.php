@@ -6,5 +6,20 @@ function chargerClasse($classe)
 
 spl_autoload_register('chargerClasse');
 session_start() ;
-var_dump($_SESSION['utilisateur']) ;
-echo $_SESSION['utilisateur']->Imgsrc() ;
+if (!isset($_SESSION['utilisateur']))
+{
+    header('location:login.php?nc=1') ;
+    exit() ;
+}
+else
+{
+  $utilisateur=$_SESSION['utilisateur'] ;
+}
+include 'db_init.php';
+$managerProjet = new ProjectManager($db) ;
+$managerUtilisateur  = new UtilisateurManager($db) ;
+
+$idUti = $managerUtilisateur->getIdUti('Fares Brahem') ;
+echo $idUti ;
+
+

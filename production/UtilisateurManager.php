@@ -90,5 +90,23 @@ class UtilisateurManager
 			return (bool) $req->fetch(PDO::FETCH_ASSOC) ;
 		}
 
+		public function getAllUsers() 
+		{
+			$utilisateurs=[] ;
+ 			$req = $this->_db->query('SELECT `nomUti` FROM utilisateur') ; 
+ 			while ($donnees = $req->fetchColumn())
+ 			{
+ 				$utilisateurs[]=$donnees ; 
+ 			}
+ 			return $utilisateurs; 
+		}
+
+		public function getIdUti($nomm)
+		{
+			$a = $this->_db->prepare('SELECT idUti from utilisateur WHERE nomUti = ? ') ;
+			$a->execute(array($nomm)) ;
+			return $a->fetchColumn() ;
+		}
+
 
 	}

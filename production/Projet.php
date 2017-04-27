@@ -1,13 +1,13 @@
 <?php 
-class projet 
+class Projet 
 {
-	protected $idP ;
+	protected $idP ,
 	 		   		$numECR ,
 	 					$desModif , 
 	 					$cot4M ,
 	 					$statut,
-	 					$dateCréa ,
-	 					$Activité , 
+	 					$dateCrea ,
+	 					$activite , 
 	 					$produit ,
 	 					$idUti ,
 	 					$progres ;
@@ -87,11 +87,11 @@ class projet
 				$this->desModif = $DesModiff ;
 			}
 		}
-	public function setCota4M ($cota4MM)
+	public function setCot4M ($cota4MM)
 		{
 			if(strlen($cota4MM)==2)
 			{
-				$this->cota4M = $cota4MM ;
+				$this->cot4M = $cota4MM ;
 			}
 		}
 	public function setStatut ($statutt)
@@ -103,14 +103,13 @@ class projet
 		}
 	public function setDateCrea($dateCreaa)
 		{
+			$dateCreaa =  date('Y-m-d',strtotime($dateCreaa)) ; ;
 			$this->dateCrea = $dateCreaa ;
 		}
 	public function setActivite($activitee)
 		{
-				if(is_string($activitee))
-				{
-					$this->produit = $produitt ;
-				}
+			$activitee = strval($activitee) ; 
+			$this->activite = $activitee ;
 		}
 	public function setProduit($produitt)
 		{

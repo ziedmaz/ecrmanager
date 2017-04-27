@@ -1,3 +1,26 @@
+<?php
+function chargerClasse($classe)
+{
+  require $classe . '.php';
+}
+
+spl_autoload_register('chargerClasse');
+session_start() ;
+if (!isset($_SESSION['utilisateur']))
+{
+    header('location:login.php?nc=1') ;
+    exit() ;
+}
+else
+{
+  $utilisateur=$_SESSION['utilisateur'] ;
+}
+include 'db_init.php';
+$managerProjet = new ProjectManager($db) ;
+$listProduits = $managerProjet->getAllProducts() ;
+$managerUtilisateur = new UtilisateurManager($db) ;
+$listeUtilisateurs = $managerUtilisateur->getAllUsers() ;
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,11 +69,11 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="<?php echo $utilisateur->Imgsrc()?>" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Bienvenue,</span>
-                <h2>Fares Brahem</h2>
+                <h2><?php echo $utilisateur->NomUti()?></h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -111,7 +134,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Fares brahem
+                    <img src="<?php echo $utilisateur->Imgsrc()?>" alt=""><?php echo $utilisateur->NomUti()?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -199,13 +222,13 @@
                   <div class="x_content">
                        <br />
                        
-                       <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="crea_projet_sub.html">
+                       <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="crea_projet_sub.php" method="POST">
 
                             <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="numEcr">Numéro d'ECR <span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="numEcr" required="required" class="form-control col-md-7 col-xs-12">
+                                <input name="numECR" type="text" id="numEcr" required="required" class="form-control col-md-7 col-xs-12">
                               </div>
                             </div> 
 
@@ -216,7 +239,7 @@
                                 <div class="control-group">
                                   <div class="controls">
                                     <div class="col-md-3 xdisplay_inputx form-group has-feedback">
-                                      <input type="text" class="form-control has-feedback-left" id="single_cal1" placeholder="Date de création" aria-describedby="inputSuccess2Status">
+                                      <input name="dateCrea" type="text" class="form-control has-feedback-left" id="single_cal1" placeholder="Date de création" aria-describedby="inputSuccess2Status">
                                       <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                                       <span id="inputSuccess2Status" class="sr-only">(success)</span>
                                     </div>
@@ -229,7 +252,7 @@
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desModif">Description de la modification <span class="required">*</span>
                               </label> 
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="desModif" required="required" class="form-control col-md-7 col-xs-12">
+                                <input name="desModif" type="text" id="desModif" required="required" class="form-control col-md-7 col-xs-12">
                               </div>
                             </div>
 
@@ -238,16 +261,16 @@
                                 </label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                  <label for="cota4M">information client:</label>
-                                  <select id="cota4M" class="form-control" required>
+                                  <select name="cota" id="cota4M" class="form-control" required>
                                     <option value="">Choisir..</option>
-                                    <option value="press">A</option>
-                                    <option value="net">B</option>
-                                    <option value="mouth">C</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
                                   </select>  
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                  <label for="cota4M">Validation documentaire :</label>
-                                  <select id="cota4M" class="form-control" required>
+                                  <select name ="4M" id="cota4M" class="form-control" required>
                                     <option value="">Choisir..</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -260,7 +283,7 @@
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Activité"> Activité <span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select id="Activité" class="form-control" required>
+                                <select name="activite" id="Activité" class="form-control" required>
                                   <option value="">Choisir..</option>
                                   <option value="ITC">ITC</option>
                                   <option value="ISC">ISC</option>
@@ -272,14 +295,13 @@
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Produit">Produit <span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select id="Produit" class="form-control" required>
+                                <select name="produit" id="Produit" class="form-control" required>
                                   <option value="">Choisir..</option>
-                                  <option value="3F3G">3F3G</option>
-                                  <option value="3F3G">CALVE</option>
-                                  <option value="BMOVOL">BMOVOL</option>
-                                  <option value="BOBKZ">BOBKZ</option>
-                                  <option value="COMUTJ92">COMUTJ92</option>
-                                  <option value="..">..</option>
+                                  <?php 
+                                  foreach ($listProduits as $value) {
+                                    echo '<option value="'.$value.'">'.$value.'</option>' ;
+                                  }
+                                  ?>
                                 </select>                        
                               </div>
                             </div> 
@@ -288,13 +310,13 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="QPTM"> QPTM chargé <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <select id="QPTM" class="form-control" required>
+                                  <select name="nomUti" id="QPTM" class="form-control" required>
                                     <option value="">Choisir..</option>
-                                    <option value="Mariem Arfaoui">Mariem Arfaoui</option>
-                                    <option value="Rym ben Ghanem">Rym ben Ghanem</option>
-                                    <option value="Najla Arfaoui">Najla Arfaoui</option>
-                                    <option value="Farah Blagui">Farah Blagui</option>
-                                    <option value="Farah Blagui">Assil haffoudhi</option>
+                                    <?php 
+                                    foreach ($listeUtilisateurs as $value) {
+                                      echo '<option value="'.$value.'">'.$value.'</option>' ;
+                                    }
+                                    ?>
                                   </select>  
                                 </div>
                             </div>
@@ -319,7 +341,7 @@
                                           </div>
                                           <div class="modal-footer">
                                             <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-8">
-                                              <button type="button" class="btn btn-danger" > Annuler </button>  
+                                              <a href="profil.php" type="button" class="btn btn-danger" > Annuler </a>  
                                             </div>
                                         </div>
                                       </div>
@@ -358,104 +380,46 @@
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- bootstrap-daterangepicker -->
+   <!-- bootstrap-daterangepicker -->
     <script src="../vendors/moment/min/moment.min.js"></script>
     <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- bootstrap-wysiwyg -->
-    <script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-    <script src="../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
-    <script src="../vendors/google-code-prettify/src/prettify.js"></script>
-    <!-- jQuery Tags Input -->
-    <script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-    <!-- Switchery -->
-    <script src="../vendors/switchery/dist/switchery.min.js"></script>
     <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
     <!-- Parsley -->
     <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
-    <!-- Autosize -->
-    <script src="../vendors/autosize/dist/autosize.min.js"></script>
-    <!-- jQuery autocomplete -->
-    <script src="../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
-    <!-- starrr -->
-    <script src="../vendors/starrr/dist/starrr.js"></script>
-    <!-- Custom Theme Scripts -->
+   <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-  </body>
-  <script type="text/javascript">
-  $(document).ready(function() {
-    function valider_form()
+    <?php
+    if (isset($_GET['ex']))
+      {
+    ?>
+        <script type="text/javascript">
+
+
+          $(document).ready(function () {
+            PNotify.removeAll() ;
+            new PNotify({
+                      title: 'Attention',
+                      text: 'Ce projet existe deja',
+                      type: 'warning',
+                      styling: 'bootstrap3'
+                    }) ;
+           });
+        </script>
+    <?php 
+      }
+    else
     {
-      //alert("haha");
-      v = $("#numEcr").val();
-      if(v.length < 2)
-      {
-        alert("numEcr invalide");
-        return false;
-      }
+      ?>
+      <script type="text/javascript">
 
-      var form_data = {
-        numEcr: v,
-        username: username,
-        is_ajax: 1
-      };
 
-      var jqxhr = $.ajax({
-      type: "POST",
-      url: "save_project.php",
-      /*dataType : "text",*/
-      data: form_data,
-      success: function(response)
-      {
-        $('#form_container').waitMe('hide');
-        //response = $.trim(response);
-        try{
-          response = jQuery.parseJSON(response);
-        }catch(err){
-          show_alert("Erreur", response, 350, 400);
-          return;
-        }
-        if(response.Result.indexOf('OK') > -1){
-          //show_alert("SuccÃ¨s", response.Message, 400, 100);
-          
-        }
-        else{
-          //show_alert("Erreur", response.Message, 350, 200);
-          alert(response.Message);
-        }
-      },
-      error: function(request, type, errorThrown)
-      {
-       
-        var message = "There was an error with the AJAX request.\n";
-        switch (type) {
-          case 'timeout':
-            message += "The request timed out.";
-            break;
-          case 'notmodified':
-            message += "The request was not modified but was not retrieved from the cache.";
-            break;
-          case 'parsererror':
-            message += "XML/Json format is bad.";
-            break;
-          default:
-            message += "HTTP Error (" + request.status + " " + request.statusText + ").";
-        }
-        message += "\n";
-        alert(message);
-        
-      }
-    }).fail(function() { alert("error: "+jqxhr.status+" : "+jqxhr.statusText+" : "+jqxhr.statusCode()+" : "+jqxhr.getAllResponseHeaders()); });
-    return false;
+          $(document).ready(function () {
+            PNotify.removeAll() ;
+          });
+      </script>
+      <?php 
     }
-    }
-    $("#valider_btn").bind("click", valider_form);
-  });
-
-</script>
-
+    ?>
+  </body>
 </html>

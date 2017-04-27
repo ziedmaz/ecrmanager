@@ -15,19 +15,19 @@
 
 		public function ajouterP(Projet $projet)
 		{
-			$q=$this->_db->prepare('INSERT INTO `projet`(`numECR`, `desModif`, `cot4m`, `statut`, `dateCrea`, `Activite`, `produit`, `idUti`) VALUES (:numECR,:desModif, :cot4m,:statut,:dateCrea,:Activite,:produit,:idUti)') ;
-			$q->bindValue('numEcr',$projet->NumECR(),PDO::PARAM_INT) ;
+			$q=$this->_db->prepare('INSERT INTO projet(numECR, desModif, cot4m, dateCrea, activite, produit, idUti) VALUES (:numECR,:desModif, :cot4m,:dateCrea,:activite,:produit,:idUti)') ;
+			$q->bindValue('numECR',$projet->NumECR(),PDO::PARAM_INT) ;
 			$q->bindValue('desModif',$projet->DesModif()) ;
 			$q->bindValue('cot4m',$projet->Cot4M()) ;
-			$q->bindValue('statut',$projet->Statut()) ;
 			$q->bindValue('dateCrea',$projet->DateCrea()) ;
-			$q->bindValue('Activite',$projet->Activite()) ;
+			$q->bindValue('activite',$projet->Activite()) ;
 			$q->bindValue('produit',$projet->Produit()) ;
 			$q->bindValue('idUti',$projet->IdUti()) ;
 			$q->execute() ;
 
 			$projet->hydrate([ 'progres' => 0, 
-				'idP' => $this->_db->lastInsertId()
+				'idP' => $this->_db->lastInsertId(),
+				'statut' => 'En cours'
 				]) ;
 		}
 
@@ -77,8 +77,19 @@
 
  		public function get($id)
  		{
- 			$donnees = $q=$this->_db->query('SELECT * FROM projet WHERE idP ='.$id)->fetch(PDO::FETCH_ASSOC) ;
+ 			$donnees = $q=$this->_db->exec('SELECT * FROM projet WHERE idP ='.$id)->fetch(PDO::FETCH_ASSOC) ;
  			return new Projet($donnees) ;
+ 		}
+
+ 		public function getAllProducts()
+ 		{
+ 			$products=[] ;
+ 			$req = $this->_db->query('SELECT `pdt` FROM produit') ; 
+ 			while ($donnees = $req->fetchColumn())
+ 			{
+ 				$products[]=$donnees ; 
+ 			}
+ 			return $products; 
  		}
 
  		

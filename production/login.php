@@ -64,15 +64,25 @@
             {
              if($_GET['con']==0)
                 {
-                ?>
+                  ?>
                   <div class="alert alert-warning alert-dismissible fade in" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                     </button>
-                    <strong>Connection interrompue </strong></br> Veuillez verifier vos identifiants et réessayer .
+                    <strong>La connection a échoué </strong><br/>Veuillez verifier vos identifiants et réessayer .
                   </div> 
-                             
-                <?php
+                  <?php
                 }
+            }
+          if(isset($_GET['na']))
+            {
+              ?>
+                <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+                  Votre compte n'est pas encore activé ! veuillez attendre la confirmation de votre leader.
+                </div> 
+                           
+              <?php
             }
           ?> 
 
